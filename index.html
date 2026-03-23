@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Élite | Премиальный салон красоты и Академия</title>
+    
+    <!-- Подключение Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* CSS ПЕРЕМЕННЫЕ ДЛЯ ПРЕМИАЛЬНОЙ ПАЛИТРЫ */
+        :root {
+            --bg-nude: #fdfaf7; /* Пудровый нюд */
+            --bg-emerald: #162621; /* Глубокий изумрудный */
+            --accent-gold: #c5a059; /* Матовое золото */
+            --accent-gold-hover: #a88542;
+            --text-dark: #2b2b2b;
+            --text-light: #fdfaf7;
+            --font-heading: 'Cormorant Garamond', serif;
+            --font-body: 'Montserrat', sans-serif;
+            --glass-bg: rgba(255, 255, 255, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.5);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+        }
+
+        /* БАЗОВЫЕ НАСТРОЙКИ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-nude);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            font-weight: 500;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* КНОПКИ */
+        .btn {
+            display: inline-block;
+            padding: 16px 32px;
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-align: center;
+        }
+
+        .btn-gold {
+            background-color: var(--accent-gold);
+            color: #fff;
+            border: 1px solid var(--accent-gold);
+        }
+
+        .btn-gold:hover {
+            background-color: var(--accent-gold-hover);
+            border-color: var(--accent-gold-hover);
+            box-shadow: 0 10px 20px rgba(197, 160, 89, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--text-light);
+            border: 1px solid var(--text-light);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--text-light);
+            color: var(--text-dark);
+            transform: translateY(-2px);
+        }
+
+        /* HEADER */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 0;
+            z-index: 1000;
+            transition: all 0.4s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        header.scrolled {
+            background: rgba(253, 250, 247, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border-bottom: none;
+        }
+
+        header.scrolled .logo, 
+        header.scrolled .nav-links a {
+            color: var(--text-dark);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--text-light);
+            letter-spacing: 2px;
+            transition: color 0.4s;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--accent-gold);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-gold) !important;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            height: 100vh;
+            background-image: linear-gradient(rgba(22, 38, 33, 0.6), rgba(22, 38, 33, 0.4)), url('https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Parallax effect */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--text-light);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 18px;
+            font-weight: 300;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+            color: #e0e0e0;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        /* БЛОК УСЛУГ (GLASSMORPHISM) */
+        .services {
+            padding: 120px 0;
+            background-image: url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        .services::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(253, 250, 247, 0.85); /* Светлая подложка для контраста текста */
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 48px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 60px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .service-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 4px;
+            padding: 50px 30px;
+            text-align: center;
+            box-shadow: var(--glass-shadow);
+            transition: transform 0.5s ease, box-shadow 0.5s ease, background 0.5s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.7);
+        }
+
+        .service-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+            color: var(--accent-gold);
+        }
+
+        .service-card h3 {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            font-size: 15px;
+            color: #555;
+            font-weight: 300;
+        }
+
+        /* БЛОК АКАДЕМИИ */
+        .academy {
+            padding: 120px 0;
+            background-color: var(--bg-emerald);
+            color: var(--text-light);
+        }
+
+        .academy .section-title, 
+        .academy .section-subtitle {
+            color: var(--text-light);
+        }
+
+        .academy .section-subtitle {
+            color: #b0b0b0;
+        }
+
+        .academy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .course-card {
+            background: rgba(255,255,255, 0.03);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            padding: 40px;
+            border-radius: 4px;
+            transition: all 0.4s ease;
+        }
+
+        .course-card:hover {
+            border-color: var(--accent-gold);
+            background: rgba(255,255,255, 0.06);
+            transform: translateY(-5px);
+        }
+
+        .course-card h4 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--accent-gold);
+        }
+
+        .course-card p {
+            font-size: 14px;
+            color: #ccc;
+            margin-bottom: 25px;
+            font-weight: 300;
+        }
+
+        .course-card ul {
+            margin-bottom: 30px;
+        }
+
+        .course-card li {
+            font-size: 14px;
+            color: #e0e0e0;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .course-card li::before {
+            content: '✦';
+            color: var(--accent-gold);
+            margin-right: 10px;
+            font-size: 12px;
+        }
+
+        /* ПОЧЕМУ МЫ */
+        .features {
+            padding: 100px 0;
+            background-color: #fff;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .feature-item {
+            padding: 30px;
+        }
+
+        .feature-number {
+            font-family: var(--font-heading);
+            font-size: 56px;
+            color: var(--accent-gold);
+            margin-bottom: 10px;
+            line-height: 1;
+        }
+
+        .feature-text {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: #0f1a16;
+            color: #aaa;
+            padding: 80px 0 40px;
+            font-size: 14px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-logo {
+            font-family: var(--font-heading);
+            font-size: 28px;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .footer-col h5 {
+            font-size: 18px;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .footer-col p, .footer-col a {
+            margin-bottom: 15px;
+            display: block;
+            transition: color 0.3s;
+        }
+
+        .footer-col a:hover {
+            color: var(--accent-gold);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            font-size: 12px;
+        }
+
+        /* АНИМАЦИИ ПОЯВЛЕНИЯ (CSS-эффекты) */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 { transition-delay: 0.2s; }
+        .delay-2 { transition-delay: 0.4s; }
+        .delay-3 { transition-delay: 0.6s; }
+
+        /* АДАПТИВНОСТЬ */
+        @media (max-width: 992px) {
+            .hero h1 { font-size: 48px; }
+            .section-title { font-size: 36px; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; } /* Скрываем меню на мобильных для упрощения */
+            .hero h1 { font-size: 36px; }
+            .hero-buttons { flex-direction: column; }
+            .hero { background-attachment: scroll; } /* Отключаем параллакс на мобильных */
+            .services { background-attachment: scroll; }
+            header { background: rgba(253, 250, 247, 0.95); padding: 15px 0; }
+            .logo { color: var(--text-dark); }
+            .header-btn { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header id="header">
+        <div class="container navbar">
+            <a href="#" class="logo">Aura Élite</a>
+            <nav class="nav-links">
+                <a href="#services">Услуги</a>
+                <a href="#academy">Академия</a>
+                <a href="#features">Преимущества</a>
+                <a href="#contacts">Контакты</a>
+            </nav>
+            <a href="#contacts" class="btn btn-gold header-btn" style="padding: 10px 24px; font-size: 12px;">Записаться</a>
+        </div>
+    </header>
+
+    <!-- MAIN SCREEN -->
+    <section class="hero">
+        <div class="container hero-content fade-in">
+            <h1>Искусство эстетики и карьера вашей мечты</h1>
+            <p>Премиальный салон красоты и академия для тех, кто ценит безупречность в каждой детали. Раскройте свою красоту или станьте востребованным beauty-экспертом.</p>
+            <div class="hero-buttons">
+                <a href="#services" class="btn btn-gold">Наши услуги</a>
+                <a href="#academy" class="btn btn-outline">Стать специалистом</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION (Glassmorphism) -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title fade-in">Совершенство вашего тела</h2>
+            <p class="section-subtitle fade-in">Инновационные методики и аппаратная косметология премиум-класса для достижения идеальных результатов без компромиссов.</p>
+            
+            <div class="services-grid">
+                <!-- Service 1 -->
+                <div class="service-card fade-in delay-1">
+                    <div class="service-icon">✦</div>
+                    <h3>Эндосфера</h3>
+                    <p>Инновационный подход к моделированию фигуры. Процедура Endospheres therapy обеспечивает идеальный силуэт, лимфодренаж и избавление от целлюлита абсолютно безболезненно.</p>
+                </div>
+                <!-- Service 2 -->
+                <div class="service-card fade-in delay-2">
+                    <div class="service-icon">⚡</div>
+                    <h3>Электроэпиляция</h3>
+                    <p>Единственный в мире метод, гарантирующий удаление нежелательных волос навсегда. Безопасно, эффективно и с ювелирной точностью под руководством топ-мастеров.</p>
+                </div>
+                <!-- Service 3 -->
+                <div class="service-card fade-in delay-3">
+                    <div class="service-icon">✧</div>
+                    <h3>Geneo</h3>
+                    <p>Аппаратная косметология нового поколения. Мгновенное омоложение, глубокое насыщение кожи кислородом, питание и возвращение естественного, благородного сияния.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ACADEMY SECTION -->
+    <section id="academy" class="academy">
+        <div class="container">
+            <h2 class="section-title fade-in">Академия красоты Aura</h2>
+            <p class="section-subtitle fade-in">Освойте профессию будущего. Мы не просто учим, мы передаем элитный опыт, ставим руку и выпускаем уверенных специалистов, готовых к работе в премиум-сегменте.</p>
+
+            <div class="academy-grid">
+                <!-- Course 1 -->
+                <div class="course-card fade-in delay-1">
+                    <h4>Мастер Эндосферы</h4>
+                    <p>Полное погружение в физиологию и технику компрессионной микровибрации. Обучение на оригинальном итальянском оборудовании.</p>
+                    <ul>
+                        <li>Теория анатомии и лимфатической системы</li>
+                        <li>Постановка руки и эргономика мастера</li>
+                        <li>Отработка на 5 моделях</li>
+                        <li>Международный сертификат</li>
+                    </ul>
+                    <a href="#contacts" class="btn btn-outline" style="width: 100%; border-color: rgba(255,255,255,0.2);">Узнать программу</a>
+                </div>
+                <!-- Course 2 -->
+                <div class="course-card fade-in delay-2">
+                    <h4>Электроэпиляция с нуля</h4>
+                    <p>Фундаментальный курс по удалению волос навсегда. От строения волоса до работы со сложными зонами и анестезией.</p>
+                    <ul>
+                        <li>Работа на премиум-аппаратах (Apilus)</li>
+                        <li>Техники работы с лицом и телом</li>
+                        <li>Секреты безболезненной процедуры</li>
+                        <li>Поддержка куратора после выпуска</li>
+                    </ul>
+                    <a href="#contacts" class="btn btn-outline" style="width: 100%; border-color: rgba(255,255,255,0.2);">Узнать программу</a>
+                </div>
+                <!-- Course 3 -->
+                <div class="course-card fade-in delay-3">
+                    <h4>Косметология Geneo</h4>
+                    <p>Обучение инновационным протоколам работы с аппаратом Geneo. Идеально для действующих косметологов, желающих повысить чек.</p>
+                    <ul>
+                        <li>Разбор 3-в-1: Оксигенация, RF, Ультразвук</li>
+                        <li>Протоколы anti-age и лечения акне</li>
+                        <li>Грамотная продажа услуги клиенту</li>
+                        <li>Именной диплом специалиста</li>
+                    </ul>
+                    <a href="#contacts" class="btn btn-outline" style="width: 100%; border-color: rgba(255,255,255,0.2);">Узнать программу</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES / WHY US -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title fade-in" style="color: var(--text-dark);">Стандарты качества</h2>
+            <div class="features-grid" style="margin-top: 60px;">
+                <div class="feature-item fade-in delay-1">
+                    <div class="feature-number">100%</div>
+                    <div class="feature-text">Оригинальное оборудование из Италии и Израиля</div>
+                </div>
+                <div class="feature-item fade-in delay-2">
+                    <div class="feature-number">Top</div>
+                    <div class="feature-text">Преподаватели — практикующие мастера с мед. образованием</div>
+                </div>
+                <div class="feature-item fade-in delay-3">
+                    <div class="feature-number">500+</div>
+                    <div class="feature-text">Успешных выпускников, открывших свои кабинеты</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contacts">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="#" class="footer-logo">Aura Élite</a>
+                    <p>Премиальный салон и центр обучения аппаратным методикам. Ваша красота и успех — наша главная ценность.</p>
+                </div>
+                <div class="footer-col">
+                    <h5>Контакты</h5>
+                    <p>г. Москва, Пресненская наб., 12<br>(Башня Федерация, 45 этаж)</p>
+                    <a href="tel:+79991234567">+7 (999) 123-45-67</a>
+                    <a href="mailto:hello@aura-elite.ru">hello@aura-elite.ru</a>
+                </div>
+                <div class="footer-col">
+                    <h5>Социальные сети</h5>
+                    <a href="#">Instagram — Портфолио и отзывы</a>
+                    <a href="#">Telegram — Запись онлайн</a>
+                    <a href="#">WhatsApp — Консультация</a>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2024 Aura Élite Beauty & Academy. Все права защищены. Дизайн премиум-класса.
+            </div>
+        </div>
+    </footer>
+
+    <!-- МИНИМАЛЬНЫЙ JAVASCRIPT ДЛЯ АНИМАЦИЙ И СКРОЛЛА -->
+    <script>
+        // Изменение стиля шапки при скролле
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Intersection Observer для плавного появления элементов (Fade-in эффекты)
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Анимируем только один раз
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
