@@ -297,6 +297,36 @@
             font-weight: 300;
         }
 
+        .service-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 20px 0;
+            object-fit: cover;
+            border: 3px solid var(--accent-gold);
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(197, 160, 89, 0.2);
+        }
+
+        .service-card:hover .service-image {
+            transform: scale(1.08) translateY(-10px);
+            box-shadow: 0 20px 40px rgba(197, 160, 89, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .service-image {
+                width: 150px;
+                height: 150px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .service-image {
+                width: 120px;
+                height: 120px;
+            }
+        }
+
         /* БЛОК АКАДЕМИИ */
         .academy {
             padding: 120px 0;
@@ -514,20 +544,20 @@
             <div class="services-grid">
                 <!-- Service 1 -->
                 <div class="service-card fade-in delay-1">
-                    <div class="service-icon">✦</div>
                     <h3>Эндосфера</h3>
+                    <img src="istockphoto-2212384471-1024x1024.jpg" alt="Эндосфера" class="service-image">
                     <p>Инновационный подход к моделированию фигуры. Процедура Endospheres therapy обеспечивает идеальный силуэт, лимфодренаж и избавление от целлюлита абсолютно безболезненно.</p>
                 </div>
                 <!-- Service 2 -->
                 <div class="service-card fade-in delay-2">
-                    <div class="service-icon">⚡</div>
                     <h3>Электроэпиляция</h3>
+                    <img src="istockphoto-1320653742-1024x1024.jpg" alt="Электроэпиляция" class="service-image">
                     <p>Единственный в мире метод, гарантирующий удаление нежелательных волос навсегда. Безопасно, эффективно и с ювелирной точностью под руководством топ-мастеров.</p>
                 </div>
                 <!-- Service 3 -->
                 <div class="service-card fade-in delay-3">
-                    <div class="service-icon">✧</div>
                     <h3>Geneo</h3>
+                    <img src="istockphoto-143920428-1024x1024.jpg" alt="Geneo" class="service-image">
                     <p>Аппаратная косметология нового поколения. Мгновенное омоложение, глубокое насыщение кожи кислородом, питание и возвращение естественного, благородного сияния.</p>
                 </div>
             </div>
